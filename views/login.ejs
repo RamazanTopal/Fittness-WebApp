@@ -1,0 +1,44 @@
+<%- include('./partials/_header.ejs') %>
+   <!-- body -->
+   <body class="main-layout">
+      <%- include('./partials/_navigation.ejs') %>
+      <!-- end header -->
+      <div class="back_re">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title">
+                     <h2>SELECT ACCOUNT role</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--  contact -->
+      <div id="contact" class="contact">
+         <div class="container">
+            <div class="row">
+               <div class="offset-md-4 col-md-4">
+                  <form id="request" class="main_form">
+                     <div class="row">
+                        <div class="col-md-12 mt-3">
+                           <a href="/trainer/login_trainer" class="btn btn-primary" style="width: 100%;font-size: 20px;">Login Trainer </a>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <a href="/trainer/register_trainer" class="btn btn-primary" style="width: 100%;font-size: 20px;">Register Trainer</a>
+                         </div>
+                         <div class="col-md-12 mt-3">
+                            <a href="/attender/login_attender" class="btn btn-primary" style="width: 100%;font-size: 20px;">Login Attender</a>
+                         </div>
+                         <div class="col-md-12 mt-3">
+                            <a href="/attender/register_attender" class="btn btn-primary" style="width: 100%;font-size: 20px;">Register Attender </a>
+                         </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end contact -->
+      <!--  footer -->
+      <%- include('./partials/_footer.ejs') %>

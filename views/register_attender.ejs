@@ -1,0 +1,54 @@
+<%- include('./partials/_header.ejs') %>
+   <!-- body -->
+   <body class="main-layout">
+      <%- include('./partials/_navigation.ejs') %>
+      <!-- end header -->
+      <div class="back_re">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title">
+                     <h2>Register</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--  add-workout -->
+      <div id="contact" class="contact">
+         <div class="container">
+            <div class="row">
+               <div class="offset-md-1 col-md-10">
+                  <form method="POST" action="/attender/register_attender" class="main_form">
+                     <div class="row">
+                        <div class="col-md-12 ">
+                           <input class="contactus" name="name" placeholder="Name" type="type" > 
+                        </div>
+                        <div class="col-md-12">
+                           <input class="contactus"  name="surname" placeholder="Surname" type="type"> 
+                        </div>
+                        <div class="col-md-12">
+                           <input class="contactus"  name="email" placeholder="Email" type="type"> 
+                        </div>
+                        <div class="col-md-12">
+                           <input class="contactus"  name="password" placeholder="Password" type="type"> 
+                        </div>
+                        <div class="col-md-12">
+                           <select class="form-select contactus" aria-label="Default select example" name="level">
+                              <option >1.seviye</option>
+                              <option >2.seviye</option>
+                              <option >3.seviye</option>
+                           </select>
+                        </div>
+                        <div class="col-md-12 ">
+                           <button class="send_btn float-right" type="submit">Register</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end add-workout -->
+      <!--  footer -->
+      <%- include('./partials/_footer.ejs') %>
