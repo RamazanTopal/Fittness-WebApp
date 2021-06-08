@@ -18,7 +18,11 @@ const attenderSchema=mongoose.Schema({
     ,
     level:{
         type:Number
-    }
+    },
+    workout:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Workout"
+    }]
 })
 attenderSchema.pre('save', async function (next) {
     // check if password is present and is modified.

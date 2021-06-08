@@ -8,7 +8,7 @@ exports.getRegister=async (req,res)=>{
 }
 exports.postRegister=async (req,res)=>{
     await Attender.create(req.body);
-    res.redirect("/attender/register_attender")
+    res.redirect("/attender/login_attender")
 }
 //login
 exports.getLogin=async (req,res)=>{
@@ -24,6 +24,7 @@ exports.postLogin=async (req,res)=>{
                 if(same){
                     req.session.userID=user._id;
                     req.session.userROLE=null;
+                    req.session.user=user;
                     res.redirect("/");
                 }
             })

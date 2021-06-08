@@ -1,0 +1,80 @@
+<%- include('./partials/_header.ejs') %>
+   <!-- body -->
+   <body class="main-layout">
+      <%- include('./partials/_navigation.ejs') %>
+      <!-- end header -->
+     <div class="back_re">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title">
+                    <h2>Service Details</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- about -->
+      <div class="about">
+         <div class="container">
+            <div class="row d_flex">
+               <div class="col-md-5">
+                     <h1 style="color: crimson;font-size: 30px;border-bottom: 1px solid black;">TRAINER INFORMATION </h1>
+                     <h1><span style="color: crimson">Name : </span> <%= trainer.name%> <%=trainer.surname%> </h1>
+                     <h1><span style="color: crimson">Email : </span> <%= trainer.email%></h1>
+                     <h1><span style="color: crimson">Role : </span> <%= trainer.role%></h1>
+                  
+               </div>
+               <div class="col-md-7">
+                  <div class="about_img">
+                     <figure><img src="/images/about.jpg" alt="#"/></figure>
+                  </div>
+               </div>
+               <div class="col-md-12 mt-5">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Level</th>
+                        <% if(userROLE){%>
+                        <th scope="col"></th>
+                        <%}%>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     <div class="row">
+                        <div class="col-md-12">
+                           <h1>Participants who received workout from a trainer <%= trainer.name%> <%=trainer.surname%></h1>
+                        </div>
+                     </div>
+                     <% for(let i=0;i<workout.attenders.length;i++){%>
+                        <tr>
+                           <th scope="row"><%=i%></th>
+                           <td><%=workout.attenders[i].name%></td>
+                           <td><%=workout.attenders[i].surname%></td>
+                           <td><%=workout.attenders[i].level%></td>
+                           <% if(userROLE){%>
+                              <% if(user._id==workout.trainer){%>
+                           <td>
+                              <form action="/trainer/<%=trainer._id%>?_method=DELETE" method="POST">
+                                 <input type="hidden" name="trainerdelete" value="<%=workout._id%>">
+                                 <input type="hidden" name="workout_attender_id" value="<%=workout.attenders[i]._id%>">
+                                 <button class="btn btn-danger">DELETE</button>
+                              </form>
+                           </td>
+                              <%}%>
+                           <%}%>
+                        </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <!-- end about -->
+      <!--  footer -->
+      <%- include('./partials/_footer.ejs') %>

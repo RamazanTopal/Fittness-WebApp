@@ -1,0 +1,39 @@
+<%- include('./partials/_header.ejs') %>
+   <!-- body -->
+   <body class="main-layout">
+      <%- include('./partials/_navigation.ejs') %>
+      <!-- end header -->
+     <div class="back_re">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title">
+                    <h2>Service Details</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- about -->
+      <div class="about">
+         <div class="container">
+            <div class="row d_flex">
+              
+               <div class="col-md-5">
+                  <div class="titlepage">
+                     <h1><%= workout.name%> </h1>
+                     <p><%= workout.hardship%></p>
+                  </div>
+               </div>
+               <div class="col-md-7">
+                  <div class="about_img">
+                     <figure><img src="/images/about.jpg" alt="#"/></figure>
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <!-- end about -->
+      <!--  footer -->
+      <%- include('./partials/_footer.ejs') %>

@@ -15,39 +15,13 @@
          </div>
       </div>
       <!-- services -->
-      <% if(!userROLE){%>
-      <div  class="services">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <p>We offer different sports branches</p>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <%for(let i=0;i<workout.length;i++){%>
-               <div class="col-md-4">
-                  <div class="se_img">
-                     <figure>
-                        <img src="images/service1.jpg" alt="#"/>
-                        <h1 style="color: aliceblue;"><%=workout[i].name%></h1>
-                     </figure>
-                  </div>
-               </div>
-               <% } %>
-            </div>
-         </div>
-      </div>
-      <%}%>
-
-      <% if(userROLE){%>
+      <%if(!userIN){%>
          <div  class="services">
             <div class="container">
                <div class="row">
                   <div class="col-md-12">
                      <div class="titlepage">
-                        <p>ADMİN DASHBOARD</p>
+                        <p>We offer different sports branches</p>
                      </div>
                   </div>
                </div>
@@ -56,53 +30,124 @@
                   <div class="col-md-4">
                      <div class="se_img">
                         <figure>
-                           <img src="images/service1.jpg" alt="#"/>
+                           <a href="/service/<%=workout[i]._id%>"><img src="images/service1.jpg" alt="#"/></a>
+                           <h1 style="color: aliceblue;"><%=workout[i].name%></h1>
+                        </figure>
+                     </div>
+                  </div>
+                  <% } %>
+               </div>
+            </div>
+         </div>
+      <%}%>
+
+      <%if(userIN){%>
+         <% if(!userROLE){%>
+         <div  class="services">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="titlepage">
+                        <p>Take workout</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <%for(let i=0;i<workout.length;i++){%>
+                  <div class="col-md-4">
+                     <div class="se_img">
+                        <figure>
+                           <a href="/service/<%=workout[i]._id%>"><img src="images/service1.jpg" alt="#"/></a>
                            <h1 style="color: aliceblue;"><%=workout[i].name%></h1>
                            <div style="display: flex;justify-content:space-between">
-                              <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#exampleModal<%=workout[i]._id%>" data-whatever="@getbootstrap">UPDATE</button>
-                              <a class="btn btn-danger" href="/service/<%=workout[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE')">DELETE</a>
+                              <% if ( attender && !(attender.workout.includes(workout[i]._id))  ) { %>
+                                 <%if( attender.level >= workout[i].level){%>
+                                    <form action="/service/reserve/<%=workout[i]._id%>" method="POST">
+                                       <button class="btn btn-primary" type="submit">Take workout</button>
+                                    </form>
+                                 <%}else{%>
+                                    <a class="btn btn-danger" href="#" onclick="return alert('if you take a workout at this level , please increase your level')">Your level is not enough</a>
+                                 <%}%>  
+                              <%}%>
+                              <% if ( attender && (attender.workout.includes(workout[i]._id))  ) { %>
+                              <a class="btn btn-danger" href="/service/reserve/<%=workout[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE')">Cancel</a>
+                              <%}%>
                            </div>
                         </figure>
                      </div>
                   </div>
-                   <!--UPDATE-->
-                   <div class="modal fade" id="exampleModal<%=workout[i]._id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                     <div class="modal-dialog" role="document">
-                     <div class="modal-content">
-
-                        <div class="modal-header">
-                           <h5 class="modal-title" id="exampleModalLabel">PRODUCT</h5>
-                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                           <span aria-hidden="true">&times;</span>
-                           </button>
-                        </div>
-
-                        <div class="modal-body">
-                           <form method="POST" action="/service/<%=workout[i]._id%>?_method=PUT">
-                              <div class="form-group">
-                                 <input name="name" type="text" class="form-control" style="color: black;" value="<%=workout[i].name%>" >
-                              </div>
-                              <hr>
-                              <div class="form-group">
-                                 <input name="hardship" type="text" class="form-control"  style="color: black;" value="<%=workout[i].hardship%>">
-                              </div>
-                             
-                              <div class="form-group" style="display: block;">
-                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                 <button class="btn btn-primary" type="submit">Update</button>
-                              </div>
-                           </form>
-                        </div>
-
-                     </div>
-                     </div>
-                  </div>
-                  <!--UPDATE finish-->
                   <% } %>
                </div>
             </div>
          </div>
          <%}%>
+      <%}%>
+      <%if(userIN){%>
+         <% if(userROLE){%>
+            <div  class="services">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="titlepage">
+                           <p>ADMİN DASHBOARD</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <%for(let i=0;i<workout.length;i++){%>
+                     <div class="col-md-4">
+                        <div class="se_img">
+                           <figure>
+                              <img src="uploads/<%=workout[i].image%>" alt="#"/>
+                              <h1 style="color: aliceblue;"><%=workout[i].name%></h1>
+                              <% if(user._id==workout[i].trainer){%>
+                              <div style="display: flex;justify-content:space-between">
+                                 <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#exampleModal<%=workout[i]._id%>" data-whatever="@getbootstrap">UPDATE</button>
+                                 <a class="btn btn-danger" href="/service/<%=workout[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE')">DELETE</a>
+                              </div>
+                              <% } %>
+                           </figure>
+                        </div>
+                     </div>
+                     <!--UPDATE-->
+                     <div class="modal fade" id="exampleModal<%=workout[i]._id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">PRODUCT</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                           </div>
+
+                           <div class="modal-body">
+                              <form method="POST" action="/service/<%=workout[i]._id%>?_method=PUT">
+                                 <div class="form-group">
+                                    <input name="name" type="text" class="form-control" style="color: black;" value="<%=workout[i].name%>" >
+                                 </div>
+                                 <hr>
+                                 <div class="form-group">
+                                    <input name="hardship" type="text" class="form-control"  style="color: black;" value="<%=workout[i].hardship%>">
+                                 </div>
+                              
+                                 <div class="form-group" style="display: block;">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary" type="submit">Update</button>
+                                 </div>
+                              </form>
+                           </div>
+
+                        </div>
+                        </div>
+                     </div>
+                     <!--UPDATE finish-->
+                     <% } %>
+                  </div>
+               </div>
+            </div>
+         <%}%>
+      <%}%>
       <!-- end services -->
       <!--  footer -->
       <%- include('./partials/_footer.ejs') %>

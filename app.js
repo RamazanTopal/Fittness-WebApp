@@ -4,7 +4,15 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const MongoStore = require('connect-mongo');
 const app=express();
+const fs=require('fs');
+const fileUpload = require('express-fileupload');
+ 
 
+//photo file create
+const uploadDir = 'public/uploads';
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
 
 //Routes
 const pageRoute=require('./routes/pageRoute');
@@ -23,9 +31,11 @@ app.use(express.static("public"));
 app.set("view engine","ejs");
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+app.use(fileUpload());  
 //global variable
 global.userIN=null;
 global.userROLE=null;
+global.user=null;
 //method-override
 app.use(methodOverride('_method',{
   methods:['POST','GET']
@@ -43,6 +53,7 @@ mongoose.connect('mongodb://localhost/FitnessApp',
 app.use('*',(req,res,next)=>{
   userIN=req.session.userID;
   userROLE=req.session.userROLE;
+  user=req.session.user;
   next();
 })
 app.use("/",pageRoute)

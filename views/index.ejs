@@ -41,7 +41,7 @@
                         <span>construction</span>
                         <h1>Stewart Fitness </h1>
                         <p> Lorem Ipsum available, but the majority have suffered lteration in some.</p>
-                        <a class="read_more" href="contact.html">Contact us</a>
+                        <a class="read_more" href="/contact">Contact us</a>
                      </div>
                   </div>
                </div>
@@ -57,7 +57,7 @@
                   <div class="titlepage">
                      <h2>About Fitness</h2>
                      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using  </p>
-                     <a class="read_more" href="Javascript:void(0)">Raed More</a>
+                     <a class="read_more" href="/about">Read More</a>
                   </div>
                </div>
                <div class="col-md-7">
@@ -81,21 +81,13 @@
                </div>
             </div>
             <div class="row">
+               <%for(let i=0;i<workout.length;i++){%>
                <div class="col-md-4">
                   <div class="se_img">
-                     <figure><img src="images/service1.jpg" alt="#"/></figure>
+                     <figure><img src="uploads/<%=workout[i].image%>" alt="#"/></figure>
                   </div>
                </div>
-               <div class="col-md-4">
-                  <div class="se_img">
-                     <figure><img src="images/service2.jpg" alt="#"/></figure>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="se_img">
-                     <figure><img src="images/service3.jpg" alt="#"/></figure>
-                  </div>
-               </div>
+               <%}%>
             </div>
          </div>
       </div>

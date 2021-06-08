@@ -11,7 +11,10 @@ router.route('/login_trainer').post(trainerController.postLogin);
 //register
 router.route('/register_trainer').get(trainerController.getRegister);
 router.route('/register_trainer').post(trainerController.postRegister);
-
+//detail
+router.route('/:id').get(trainerController.detailTrainer);
+//delete
+router.route('/:id').delete(trainerController.deleteAttender);
 
 
 module.exports=router
