@@ -1,11 +1,14 @@
 const Workout=require('../models/workouts');
 const Trainer=require('../models/trainer');
 const Attender=require('../models/attender');
+const nodemailer=require('nodemailer');
 exports.getIndex=async (req,res)=>{
-    const workout=Workout.find();
+    const workout=await Workout.find();
+    const trainer=await Trainer.find();
     res.render("index",{
         page_name:'index',
-        workout:workout
+        workout:workout,
+        trainer:trainer
     })
 }
 
@@ -20,11 +23,34 @@ exports.getContact=async (req,res)=>{
         page_name:'contact'
     })
 }
-
-exports.getGalery=async (req,res)=>{
-    res.render("gallery",{
-        page_name:'gallery'
-    })
+exports.sendEmail=async (req,res)=>{
+    const outputMessage=`
+    <h1>Mail Detail</h1>
+    <ul>
+        <li>${req.body.name}</li>
+        <li>${req.body.email}</li>
+    </ul>
+    <h1>Message</h1>
+    <p>${req.body.message}</p>
+    `;
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+          user: "gmailadresi", // gmail 
+          pass: "password", // gmail password
+        },
+      });
+        // send mail with defined transport object
+    let info = await transporter.sendMail({
+            from: `"Fitness Web Application" <${req.body.email}>`, // sender address
+            to: "receiver@example.com", // list of receivers
+            subject: "Fitness Question", // Subject line
+            text: `${req.body.message}`, // plain text body
+            html: outputMessage, // html body
+    });
+    res.redirect('/contact');
 }
 //service
 exports.deleteService=async (req,res)=>{

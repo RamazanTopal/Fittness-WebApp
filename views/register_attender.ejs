@@ -19,7 +19,7 @@
          <div class="container">
             <div class="row">
                <div class="offset-md-1 col-md-10">
-                  <form method="POST" action="/attender/register_attender" class="main_form">
+                  <form method="POST" action="/attender/register_attender" class="main_form" enctype="multipart/form-data">
                      <div class="row">
                         <div class="col-md-12 ">
                            <input class="contactus" name="name" placeholder="Name" type="type" > 
@@ -32,6 +32,12 @@
                         </div>
                         <div class="col-md-12">
                            <input class="contactus"  name="password" placeholder="Password" type="password"> 
+                        </div>
+                        <div class="col-md-12">
+                           <div class="form-row">
+                              <label for="image1" class="col-md-2 control-label" style="font-size:large">Fotoğraf Seçiniz:</label>
+                              <input class="col-md-10 form-control-file" id="image1" name="image" placeholder="image" type="file"> 
+                           </div>
                         </div>
                         <div class="col-md-12">
                            <div class="form-row">

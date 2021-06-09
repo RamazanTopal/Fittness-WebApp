@@ -19,6 +19,9 @@ const attenderSchema=mongoose.Schema({
     level:{
         type:Number
     },
+    image:{
+      type:String
+    },
     workout:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Workout"

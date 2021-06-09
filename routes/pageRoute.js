@@ -7,7 +7,7 @@ const router=express.Router();
 router.route('/').get(pageController.getIndex);
 router.route('/about').get(pageController.getAbout);
 router.route('/contact').get(pageController.getContact);
-router.route('/gallery').get(pageController.getGalery);
+router.route('/contact').post(pageController.sendEmail);
 //service
 router.route('/service').get(pageController.getService);
 router.route('/service/:id').delete(pageController.deleteService);

@@ -16,6 +16,9 @@ const trainerSchema=mongoose.Schema({
         type:String
     }
     ,
+    image:{
+      type:String
+    },
     role:{
         type:String
     },

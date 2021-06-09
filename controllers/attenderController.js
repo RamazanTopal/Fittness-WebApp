@@ -7,8 +7,20 @@ exports.getRegister=async (req,res)=>{
     })
 }
 exports.postRegister=async (req,res)=>{
-    await Attender.create(req.body);
+    let uploadeImage = req.files.image;
+    let uploadPath = __dirname + '/../public/uploads/' + uploadeImage.name;
+    uploadeImage.mv(uploadPath, async () => {
+    
+    const work=await Attender.create({
+        name:req.body.name,
+        surname:req.body.surname,
+        email:req.body.email,
+        password:req.body.password,
+        level:req.body.level,
+        image:uploadeImage.name//fotograf cekerken basina uploads/image seklinde olucak
+    });
     res.redirect("/attender/login_attender")
+    });
 }
 //login
 exports.getLogin=async (req,res)=>{
